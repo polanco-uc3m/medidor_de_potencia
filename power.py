@@ -1,3 +1,8 @@
+#-*-coding:utf-8-*-
+
+# Author Antonio Polanco Belmonte
+
+#-------------------------------------------------------------------------------
 import serial
 import time
 import numpy as np
