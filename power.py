@@ -66,6 +66,8 @@ while r==0:
         v_min=min(v_ciclo)
         i_pico=(abs(i_max)+abs(i_min))/2
         v_pico=(abs(v_max)+abs(v_min))/2
+        i_ef=i_pico/(sqrt(2))
+        v_ef=v_pico/(sqrt(2))
         posic=0
         for i in i_ciclo:
             if i==i_max:
@@ -85,11 +87,13 @@ while r==0:
             caracter= ""
         fdp = np.cos((abs(desfase)*2*np.pi)/20000)
         fdr = np.sin((abs(desfase)*2*np.pi)/20000)
-        S = i_pico*v_pico/2
+        S = i_ef*v_ef
         Q = S*fdr
         P = S*fdp
         print(t_i)
         print(t_v)
+        print ("i eficaz=",i_ef)
+        print ("v eficaz=",v_ef)
         print ("fdp =",fdp,caracter)
         print ("La potencia aparente es S=",S)
         print ("La potencia reactiva es Q=",Q)
