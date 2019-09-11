@@ -19,7 +19,7 @@ RUN echo /dev/sdd1	/media/usb4	vfat	defaults,user,umask=002,nofail,utf8	0	0 >> /
 # Install Packages.
 RUN apt update \
 	&& apt-get install python3-serial \
-	&& apt-get install -y i2c-tools \
+	&& apt-get install python3-numpy \
 	&& apt-get install -y python3.5 \
 	# Remove package lists to free up space
 	&& rm -rf /var/lib/apt/lists/*
