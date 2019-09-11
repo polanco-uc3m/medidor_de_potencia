@@ -20,5 +20,5 @@ mkdir -p /media/usb1 && mount /media/usb4
 echo usb4 mounted
 fi
 udevadm control --reload-rules
-python /app/power.py
+python3.5 /app/power.py
 exit 0
