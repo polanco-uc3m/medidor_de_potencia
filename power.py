@@ -18,8 +18,9 @@ arduino.open()
 
 while r==0: 
     arduino.flushInput()
-    time.sleep(3)
+    
     rpiLibre = 'y'
+    time.sleep(3)
     arduino.write(str.encode(rpiLibre))
     a = arduino.inWaiting()
     print(a)
