@@ -6,7 +6,7 @@
 import serial
 import time
 import numpy as np
-from matplotlib import pyplot as plt
+##from matplotlib import pyplot as plt
 #from scipy.optimize import leastsq
 
 rpiLibre = 'n'
@@ -93,14 +93,14 @@ while r==0:
         print ("La potencia aparente es S=",S)
         print ("La potencia reactiva es Q=",Q)
         print ("La potencia activa es P=",P) 
-        xt =t_ciclo
-        yi=i_ciclo
-        yv=v_ciclo
-        plt.plot(xt, yi, 'r-')
-        plt.plot(xt, yv, 'b-')
-        plt.xlabel('tiempo (us)')
-        plt.ylabel('Voltaje (V) -Intensidad (A)')
-        plt.title('Circuito R')
-        plt.legend(('Intensidad', 'Voltaje'))
-        plt.grid(True)
-        plt.show()
+##        xt =t_ciclo
+##        yi=i_ciclo
+##        yv=v_ciclo
+##        plt.plot(xt, yi, 'r-')
+##        plt.plot(xt, yv, 'b-')
+##        plt.xlabel('tiempo (us)')
+##        plt.ylabel('Voltaje (V) -Intensidad (A)')
+##        plt.title('Circuito R')
+##        plt.legend(('Intensidad', 'Voltaje'))
+##        plt.grid(True)
+##        plt.show()
