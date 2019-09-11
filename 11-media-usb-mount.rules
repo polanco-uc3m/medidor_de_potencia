@@ -1,0 +1,16 @@
+#UDEV Rules for mounting USB in /media
+KERNEL!="sd[a-z][0-9]", GOTO="media-usb-%n_end"  
+# Import FS infos  
+IMPORT{program}="/sbin/blkid -o udev -p %N"  
+# Specify label  
+ENV{dir_name}="usb%n"  
+# Global mount options  
+ACTION=="add", ENV{mount_options}="defaults"  
+# Filesystem-specific mount options  
+ACTION=="add", ENV{ID_FS_TYPE}=="vfat|ntfs", ENV{mount_options}="$env{mount_options},utf8,umask=002"  
+# Mount the device  
+ACTION=="add", RUN+="/bin/mkdir -p /media/%E{dir_name}", RUN+="/bin/mount -o $env{mount_options} /dev/%k /media/%E{dir_name}"  
+# Clean up after removal  
+ACTION=="remove", ENV{dir_name}!="", RUN+="/bin/umount -l /media/%E{dir_name}", RUN+="/bin/rmdir /media/%E{dir_name}"  
+# Exit  
+LABEL="media-usb-%n_end"
