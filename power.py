@@ -66,8 +66,8 @@ while r==0:
         v_min=min(v_ciclo)
         i_pico=(abs(i_max)+abs(i_min))/2
         v_pico=(abs(v_max)+abs(v_min))/2
-        i_ef=i_pico/(sqrt(2))
-        v_ef=v_pico/(sqrt(2))
+        i_ef=i_pico/(np.sqrt(2))
+        v_ef=v_pico/(np.sqrt(2))
         posic=0
         for i in i_ciclo:
             if i==i_max:
