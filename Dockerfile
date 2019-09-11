@@ -31,20 +31,12 @@ COPY . /app
 COPY 11-media-usb-mount.rules /etc/udev/rules.d/
 
 # Make directories to manage data
-RUN mkdir to_send
-RUN mkdir sent_data
-
-# Set Cronjobs
-#RUN crontab /app/cronjobs
-#RUN service cron restart
 
 # Give permissions
-RUN chmod 777 app/load_data_1.sh
-RUN chmod 777 app/load_data_2.sh
 RUN chmod +x /app/start.sh
 RUN chmod +x /app/PowerOff.sh
 RUN chmod +x /app/Reboot.sh
 
 # run python script when container lands on device
 
-CMD modprobe i2c-dev && /app/start.sh
+CMD /app/start.sh
