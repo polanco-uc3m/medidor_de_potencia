@@ -9,30 +9,33 @@ import numpy as np
 ##from matplotlib import pyplot as plt
 #from scipy.optimize import leastsq
 
-rpiLibre = 'n'
-r=0
-caracter="inductivo"
-arduino=serial.Serial('/dev/ttyACM0',baudrate=9600, timeout = 3.0)
+rpiLibre = 'n' #variable para indicar al micro que se pueden recibir datos
+r=0 #variable que se utiliza para repetir el bucle while hasta recibir los datos
+caracter="inductivo" #para imprimir por consola si el fdp es inductivo o capacitivo
+#inicia la comunicación con el micro
+arduino=serial.Serial('/dev/ttyACM0',baudrate=9600, timeout = 3.0) 
 arduino.close()
 arduino.open()
 
-while r==0: 
-    arduino.flushInput()
+while r==0:  
+    arduino.flushInput() #elimina los datos que se hayan quedado a la espera de ser recibidos
     
-    rpiLibre = 'y'
-    time.sleep(3)
-    arduino.write(str.encode(rpiLibre))
-    a = arduino.inWaiting()
+    rpiLibre = 'y' #raspberry lista para recibir
+    time.sleep(3)# Da tiempo a capturar los datos
+    arduino.write(str.encode(rpiLibre)) # manda la señal de raspberry lista para recibir
+    a = arduino.inWaiting() #comprueba que hay datos en cola
     print(a)
     if a>0:
         r=2
         vMatrix=[]
         iMatrix=[]
         tMatrix=[]
+        #en esta parte se reciben los valores
         for i in range(150):
             tMatrix.append(arduino.readline())
             iMatrix.append(arduino.readline())
-            vMatrix.append(arduino.readline())            
+            vMatrix.append(arduino.readline())
+ #en esta parte se borran lops caracteres extra por culpa de la función Serial.println()
         for i in range(150):
             tMatrix[i]=tMatrix[i][:-2]
             iMatrix[i]=iMatrix[i][:-2]
@@ -41,11 +44,12 @@ while r==0:
             tMatrix[i]=int(tMatrix[i])
             iMatrix[i]=int(iMatrix[i])
             vMatrix[i]=int(vMatrix[i])
-
+ #en esta parte se traducen los valores de intensidad y voltaje
         for i in range(150):
-            iMatrix[i]=(510-iMatrix[i])*27.03/1023
-            vMatrix[i]=(508-vMatrix[i])*55.01/1024
+            iMatrix[i]=(512-iMatrix[i])*27.03/1023
+            vMatrix[i]=(501-vMatrix[i])*54.7/1024
         print("start")
+ #en esta parte se desechan los valores fuera de los primeros 20ms
         t=0
         k=0
         t_ciclo=[]
@@ -59,7 +63,8 @@ while r==0:
             k=k+1
         #print(tMatrix)
         #print(iMatrix)
-        #print(vMatrix)  
+        #print(vMatrix)
+     #calculo de variables
         i_max=max(i_ciclo)
         i_min=min(i_ciclo)
         v_max=max(v_ciclo)
@@ -90,6 +95,8 @@ while r==0:
         S = i_ef*v_ef
         Q = S*fdr
         P = S*fdp
+
+        #mostrar por pantalla
         print(t_i)
         print(t_v)
         print ("i eficaz=",i_ef)
