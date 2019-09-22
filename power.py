@@ -16,7 +16,7 @@ caracter="inductivo" #para imprimir por consola si el fdp es inductivo o capacit
 arduino=serial.Serial('/dev/ttyACM0',baudrate=9600, timeout = 3.0) 
 arduino.close()
 arduino.open()
-
+print("-----------------------------")
 while r==0:  
     arduino.flushInput() #elimina los datos que se hayan quedado a la espera de ser recibidos
     
@@ -97,8 +97,8 @@ while r==0:
         P = S*fdp
 
         #mostrar por pantalla
-        print(t_i)
-        print(t_v)
+        print("tiempo de pico I:",t_i)
+        print("tiempo de pico V:",t_v)
         print ("i eficaz=",i_ef)
         print ("v eficaz=",v_ef)
         print ("fdp =",fdp,caracter)
